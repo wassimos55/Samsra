@@ -21,7 +21,7 @@
               $checkEmail->execute();
           
               if($checkEmail->rowCount()>0){
-                  echo '<div class="alert alert-danger" role="alert">
+                  echo '<div class="badge bg-gradient-danger" >
                   This account is already in use
                 </div>';
               }else{
@@ -41,10 +41,10 @@
                   $addUser->bindParam("ville",$ville);
                   $addUser->bindParam("password",$password);
                   if($addUser->execute()){
-                      echo '<div class="alert alert-success" role="alert">Account created successfully </div>';
+                      echo '<span class="badge bg-gradient-success" >Account created successfully </span>';
                       echo "<meta http-equiv=\"refresh\" content=\"2;URL=login.php\">";
                   }else{
-                      echo '<div class="alert alert-danger" role="alert">An unexpected error occurred </div>';
+                      echo '<span class="badge bg-gradient-danger "  >An unexpected error occurred </span>';
                   }
                  
               }

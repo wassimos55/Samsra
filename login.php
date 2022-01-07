@@ -10,6 +10,33 @@
     <div class="row">
       <div class="col-lg-8 mx-auto d-flex justify-content-center flex-column">
         <div class="card d-flex justify-content-center p-4 ">
+              <?php 
+                  if(isset($_POST['login'])){
+                      $login = $database->prepare("SELECT * FROM users WHERE EMAIL = :email AND PASSWORD =:password");
+                      $login->bindParam("email",$_POST['email']);
+                      $passwordUser = md5($_POST['password']);
+                      $login->bindParam("password",$passwordUser);
+                      $login->execute();
+                      if($login->rowCount()===1){
+                          $user = $login->fetchObject();
+                          session_start();
+                          //$_SESSION['user'] = $user;
+
+                          
+                          //echo 'Welcome' . $user->name;
+                          // $_SESSION['email']= $user->email;
+                          // $_SESSION['password']= $user->PASSWORD;
+                          // $_SESSION['name']= $user->name;
+                          //we have a problem with session
+                          
+                          echo "<meta http-equiv=\"refresh\" content=\"2;URL=user\index.php\">";
+                        
+                      }else{
+                      echo '<div class="badge bg-gradient-danger">Incorrect password or email</div>';
+                      }
+                  }
+
+                ?>
           <div class="text-center">
             <h3 class="text-gradient text-info">Connexion</h3>
             <p class="mb-0">
